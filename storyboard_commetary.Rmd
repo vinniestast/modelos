@@ -1,0 +1,164 @@
+---
+title: "Adult Dataset UCI"
+output: flexdashboard::flex_dashboard
+---
+
+Estrutura de dados {data-orientation=rows}
+=====================================  
+    
+   
+Row {data-height=400}
+-------------------------------------
+
+### Estrutura de dados
+
+```{r}
+source("C:/Users/vdeolinfo/Documents/data_storyline/setup.R")
+base <- read.csv2("C:/Users/vdeolinfo/Documents/data_storyline/adult.csv",
+                  sep = ",",na.strings = "")
+
+# Resumo dos dados
+DT::datatable(ExpData(data=base,type=1))
+
+```
+
+Row {data-height=600}
+-------------------------------------
+   
+### Estrutura de dados por variável
+
+```{r}
+source("C:/Users/vdeolinfo/Documents/data_storyline/setup.R")
+# Entrada de dados
+base <- read.csv2("C:/Users/vdeolinfo/Documents/data_storyline/adult.csv",
+                  sep = ",",na.strings = "")
+
+# Estrutura dos dados
+DT::datatable(ExpData(data=base,type=2))
+```   
+    
+### Mapa de valores faltantes
+
+```{r}
+source("C:/Users/vdeolinfo/Documents/data_storyline/setup.R")
+# Entrada de dados
+base <- read.csv2("C:/Users/vdeolinfo/Documents/data_storyline/adult.csv",
+                  sep = ",",na.strings = "")
+
+# Verificação de dados faltantes
+missmap(base,main = "Mapa de valores faltantes")
+
+```
+
+Análise explorátoria de dados {data-orientation=rows}
+=====================================     
+   
+Row {data-height=400}
+-------------------------------------
+
+### Mapa de Correlação das variáveis numéricas
+
+```{r}
+# Setup
+source("C:/Users/vdeolinfo/Documents/data_storyline/setup.R")
+
+# Entrada de dados
+base <- read.csv2("C:/Users/vdeolinfo/Documents/data_storyline/adult.csv",
+                  sep = ",",na.strings = "")
+
+# Correlação
+M <- cor(select_if(base,is.numeric))
+corrplot(M,method = "color")
+
+```
+
+### Matriz de Correlação das variáveis numéricas
+
+```{r}
+# Setup
+source("C:/Users/vdeolinfo/Documents/data_storyline/setup.R")
+
+# Entrada de dados
+base <- read.csv2("C:/Users/vdeolinfo/Documents/data_storyline/adult.csv",
+                  sep = ",",na.strings = "")
+
+# Correlação
+round(cor(select_if(base,is.numeric)),3) %>% 
+ kable() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), font_size = 12)
+```
+
+
+Row {data-height=600}
+-------------------------------------
+### Resumo de dados categoricos
+
+```{r}
+# Setup
+source("C:/Users/vdeolinfo/Documents/data_storyline/setup.R")
+
+# Entrada de dados
+base <- read.csv2("C:/Users/vdeolinfo/Documents/data_storyline/adult.csv",
+                  sep = ",",na.strings = "")
+
+# Resumo de dados categoricas
+DT::datatable(ExpCTable(base,
+                        Target=NULL,
+                        margin=1,
+                        clim=10,
+                        nlim=NULL,
+                        round=2,
+                        bin=NULL,
+                        per=T))
+```   
+    
+
+Modelagem estatística: Cluster {data-orientation=rows}
+=====================================     
+   
+Row {data-height=600}
+-------------------------------------
+
+### Analise de cluster
+
+```{r}
+```
+
+Row {data-height=400}
+-------------------------------------
+   
+### Tabelas dos cluster
+
+```{r}
+```   
+    
+### Metricas do modelo cluster
+
+```{r}
+```
+
+Modelagem de estatística: FFtrees {data-orientation=rows}
+=====================================     
+   
+Row {data-height=600}
+-------------------------------------
+
+### Árvore de decisão
+
+```{r}
+```
+
+Row {data-height=400}
+-------------------------------------
+   
+### Gráfico modelo
+
+```{r}
+```   
+    
+### Metricas do modelo de árvore de decisão
+
+```{r}
+```
+
+
